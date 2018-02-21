@@ -38,6 +38,12 @@ export class AuthConfig {
     public oidc? = true;
 
     /**
+     * Defines whether to omit to set the response type to
+     * id_token even if the id_token is requested (not supported by cognito)
+     */
+    public cognitoOidc? = false;
+    
+    /**
      * Defines whether to request a access token during
      * implicit flow.
      */
