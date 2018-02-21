@@ -929,11 +929,14 @@ export class OAuthService
                 state = nonce;
             }
 
-            if (!this.requestAccessToken && !this.oidc) {
-                throw new Error('Either requestAccessToken or oidc or both must be true');
+            if (!this.requestAccessToken && !this.oidc && !this.cognitoOidc) {
+                throw new Error('Either requestAccessToken, oidc or cognitoOidc must be true');
             }
-
-            if (this.oidc && this.requestAccessToken) {
+            
+            if (this.cognitoOidc) {
+                this.responseType = 'token';
+            }
+            else if (this.oidc && this.requestAccessToken) {
                 this.responseType = 'id_token token';
             }
             else if (this.oidc && !this.requestAccessToken) {
